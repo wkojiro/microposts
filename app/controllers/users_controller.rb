@@ -19,6 +19,13 @@ class UsersController < ApplicationController
  end
  
  def edit
+    @user = User.edit(user_params)
+    if @user.save
+        flash[:success] = "Edit Successfully done!"
+        redirect_to @user
+       else
+        render 'new'
+    end
  end
  
  def update
