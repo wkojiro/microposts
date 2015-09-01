@@ -17,6 +17,12 @@ class UsersController < ApplicationController
        render 'new'
     end
  end
+ 
+ def edit
+ end
+ 
+ def update
+ end
   
   private
   # permit でホワイトリスト指定(ストロングパラメータ）name , email ,　password , password confirmation は許可している(それ以外は認めない）、という意味。
