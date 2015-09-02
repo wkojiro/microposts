@@ -1,0 +1,40 @@
+<h1>edit</h1>
+
+<%= form_for @user, :html => {:class=>"form-horizontal",:role=> "form"}  do |f| %>
+
+<div class="form-group">
+   <label class="col-sm-2 control-label">名前</label>
+   <div class="col-sm-8">
+   <%= f.text_field :name ,:class=>"form-control" ,:placeholder=>"名前" %>
+   </div>
+</div>
+
+<div class="form-group">
+   <label class="col-sm-2 control-label">メール</label>
+   <div class="col-sm-8">
+   <%= f.text_field :email ,:class=>"form-control" ,:placeholder=>"メール" %>
+   </div>
+</div>
+
+<div class="form-group">
+   <label class="col-sm-2 control-label">プロフィール</label>
+   <div class="col-sm-8">
+   <%= f.text_field :profile ,:class=>"form-control" ,:placeholder=>"プロフィール" %>
+   </div>
+</div>
+
+<div class="form-group">
+   <label class="col-sm-2 control-label">場所</label>
+   <div class="col-sm-8">
+   <%= f.text_field :area ,:class=>"form-control" ,:placeholder=>"いまどこ？" %>
+   </div>
+</div>
+
+<div class="form-group">
+
+   <div class="col-sm-8  col-sm-offset-2">
+   <%= f.submit class: "btn btn-default btn-primary" %>
+   </div>
+</div>
+<% end %>
+
