@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-
- def show #追加
+  before_action :set_user, only: [:edit, :update,:destroy]
+  
+ def show 
   @user = User.find(params[:id])
   @microposts = @user.microposts
  end
@@ -18,11 +19,27 @@ class UsersController < ApplicationController
        render 'new'
     end
  end
-  
+ 
+ def edit
+   @user = User.find(params[:id])
+ end
+
+ def update
+    if @user.update(user_params)
+       flash[:success] = "update done!"    
+       redirect_to @user
+    else
+       render 'edit'
+    end
+ end
+ 
   private
-  # permit でホワイトリスト指定(ストロングパラメータ）name , email ,　password , password confirmation は許可している(それ以外は認めない）、という意味。
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :profile, :area, :password, :password_confirmation)
   end
+  
+  def set_user
+    @user = User.find(params[:id])
+  end  
 end
 
