@@ -11,9 +11,12 @@
 　 　      <%= @user.profile%></span>
           <small><cite title="<%= @user.area %>"><%= @user.area %><i class="glyphicon glyphicon-map-marker"></i></cite></small>
           <p><i class="glyphicon glyphicon-envelope"></i><%= @user.email %>
+                     <span><%= link_to "フォローしている" , followings_user_path(@user) %></span>
+                                <span><%= link_to "フォローされている" , followers_user_path(@user) %></span>
          <br />
          <div style="text-align:center;">
            <%= link_to 'edit', edit_user_path(@user), class: "btn btn-primary" %>
+           
          </div>
 　 　</section>
 　 </div>
@@ -31,9 +34,9 @@
   <div class="col-md-2">
     　<h3>Relationship ()</h3>
        <ol class="relationship">
-           <%= @following.each do |name| %>
-           <%= @following.name %>
-           <% end %> 
+           <span><%= link_to "Follower user" , followings_user_path(@user) %></span>
+
+
        </ol>
   </div>
 </div>
