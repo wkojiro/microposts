@@ -1,8 +1,24 @@
-
-<div class="row">
-　   <%= @followings.each do |name| %>
-　   <%= @followings.name %>
-　   <% end %>
-
+<h1>following users (<%= current_user.name %>) </h1>
+<h3>フォローユーザー数：<%= @followings.count %></h3>
+<div class="row"> 
+   <% @followings.each do |followings| %>
+    <div class='col-sm-4'>
+       <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class='panel-title'><%= followings.name %>(<%= followings.id %>)</h4>
+        </div>
+         <div class="panel-body">
+          <p>
+          <%= followings.profile %></p>
+          <p>
+          <%= followings.area %>
+          </p>
+         </div>
+         <div class='panel-footer'>
+          <a class='btn btn-default' href='#'><%= followings.email %></a>
+          <%= link_to 'プロフィールを確認', followings, class: "btn btn-primary" %>
+         </div>
+       </div>
+    </div>
+    <% end %>
  </div>
-

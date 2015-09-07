@@ -11,8 +11,4 @@ class RelationshipsController < ApplicationController
         current_user.unfollow(@user)
     end
     
-     def following
-      @users = @user.following_users
-     end
-
 end

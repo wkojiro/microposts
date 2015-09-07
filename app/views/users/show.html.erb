@@ -3,20 +3,21 @@
    <div class="well well-sm">        
     <section class="user_info">
 　   <div class="avator" style="text-align:center;">
-　       <%= session[:user_id] %>
          <%= gravatar_for @user %>
      </div>
 　     <h4><%= @user.name %></h4>
 　 　    <span stye="display:in-block;">
 　 　      <%= @user.profile%></span>
           <small><cite title="<%= @user.area %>"><%= @user.area %><i class="glyphicon glyphicon-map-marker"></i></cite></small>
-          <p><i class="glyphicon glyphicon-envelope"></i><%= @user.email %>
-                     <span><%= link_to "フォローしている" , followings_user_path(@user) %></span>
-                                <span><%= link_to "フォローされている" , followers_user_path(@user) %></span>
-         <br />
+           <p><i class="glyphicon glyphicon-envelope"></i><%= @user.email %>
+           <% if current_user == @user %>
+           <span><%= link_to "フォローしている" , followings_user_path(@user) %></span>
+           <span><%= link_to "フォローされている" , followers_user_path(@user) %></span>
+
+           <% end %>
+          <br />
          <div style="text-align:center;">
            <%= link_to 'edit', edit_user_path(@user), class: "btn btn-primary" %>
-           
          </div>
 　 　</section>
 　 </div>
@@ -29,14 +30,5 @@
            <%= render @microposts %>
        </ol>
 　  <% end %>               
-
-  </div>
-  <div class="col-md-2">
-    　<h3>Relationship ()</h3>
-       <ol class="relationship">
-           <span><%= link_to "Follower user" , followings_user_path(@user) %></span>
-
-
-       </ol>
   </div>
 </div>
