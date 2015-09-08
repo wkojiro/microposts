@@ -4,26 +4,37 @@
     <section class="user_info">
 　   <div class="avator" style="text-align:center;">
          <%= gravatar_for @user %>
-     </div>
+     </div>    <% if current_user == @user %>
 　     <h4><%= @user.name %></h4>
+　         <% end %>
 　 　    <span stye="display:in-block;">
 　 　      <%= @user.profile%></span>
           <small><cite title="<%= @user.area %>"><%= @user.area %><i class="glyphicon glyphicon-map-marker"></i></cite></small>
            <p><i class="glyphicon glyphicon-envelope"></i><%= @user.email %>
-           <% if current_user == @user %>
-           <span><%= link_to "フォローしている" , followings_user_path(@user) %></span>
-           <span><%= link_to "フォローされている" , followers_user_path(@user) %></span>
-
-           <% end %>
+                        
+                <% @followings = @user.following_users %>
+                <% @followers = @user.follower_users %>
+                <span><%= link_to "フォローしている" , followings_user_path(@user) %>(<%= @followings.count %>)</span>
+                <span><%= link_to "フォローされている" , followers_user_path(@user) %>(<%= @followers.count %>)</span>
+               
           <br />
+         <% if current_user == @user %>
          <div style="text-align:center;">
            <%= link_to 'edit', edit_user_path(@user), class: "btn btn-primary" %>
          </div>
+         <% end %>
 　 　</section>
 　 </div>
 　</aside>
   <div class="col-md-8">
-    <%= render 'follow_form' if logged_in? %>
+<div id = "follow_form">
+  <% if current_user.following?(@user) %>
+  <%= @user %>
+    <%= render 'unfollow' %>
+   <% else %>
+    <%= render 'follow' %>
+   <% end %>
+  </div>
     <% if @user.microposts.any? %>
     　<h3>Microposts (<%= @user.microposts.count %>)</h3>
        <ol class="microposts">
