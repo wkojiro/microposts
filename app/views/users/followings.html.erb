@@ -1,5 +1,5 @@
 <%= render 'test' %>
-<h1>following users (<%= current_user.name %>) </h1>
+<h1>following users (<%= @user.name %>) </h1>
 <h3>フォローユーザー数：<%= @followings.count %></h3>
 <div class="row"> 
    <% @followings.each do |followings| %>
@@ -18,9 +18,10 @@
          <div class='panel-footer'>
           <a class='btn btn-default' href='#'><%= followings.email %></a>
           <%= link_to 'プロフィールを確認', followings, class: "btn btn-primary" %>
-   
-
-
+        
+        ここにunfollowの表示を出す。
+        
+        
          </div>
        </div>
     </div>

@@ -7,9 +7,12 @@
          <%= gravatar_for @user %>
      </div>    <% if current_user == @user %>
 　     <h4><%= @user.name %></h4>
+　     <% else %>
+　     <h4>ユーザー名はcurrent_userではないです。<%= @user.name %></h4>
 　         <% end %>
 　 　    <span stye="display:in-block;">
 　 　      <%= @user.profile%></span>
+　 　       <%= link_to '削除', user_path(@user), method: 'DELETE' %>
           <small><cite title="<%= @user.area %>"><%= @user.area %><i class="glyphicon glyphicon-map-marker"></i></cite></small>
            <p><i class="glyphicon glyphicon-envelope"></i><%= @user.email %>
                         
@@ -28,14 +31,7 @@
 　 </div>
 　</aside>
   <div class="col-md-8">
-<div id = "follow_form">
-  <% if current_user.following?(@user) %>
-  <%= @user %>
-    <%= render 'unfollow' %>
-   <% else %>
-    <%= render 'follow' %>
-   <% end %>
-  </div>
+  <%= render 'follow_form' if logged_in? %>
     <% if @user.microposts.any? %>
     　<h3>Microposts (<%= @user.microposts.count %>)</h3>
        <ol class="microposts">
