@@ -1,9 +1,19 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update,:destroy]
-  
+
  def show 
   @user = User.find(params[:id])
   @microposts = @user.microposts
+ end
+ 
+ def followings
+     @user = User.find(params[:id])
+     @followings = @user.following_users
+ end
+
+ def followers
+     @user = User.find(params[:id])
+     @followers = @user.follower_users
  end
  
  def new
@@ -40,6 +50,7 @@ class UsersController < ApplicationController
   
   def set_user
     @user = User.find(params[:id])
-  end  
+  end
+  
 end
 

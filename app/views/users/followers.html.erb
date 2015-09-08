@@ -1,0 +1,34 @@
+
+<h1>followers users (<%= @user.name %>) </h1>
+<h3>フォロワーユーザー数：<%= @followers.count %></h3>
+<div class="row">
+ 
+
+   <% @followers.each do |followers| %>
+    <div class='col-sm-4'>
+       <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class='panel-title'><%= followers.name %>(<%= followers.id %>)</h4>
+        </div>
+         <div class="panel-body">
+          <p>
+          <%= followers.profile %></p>
+          <p>
+          <%= followers.area %>
+          </p>
+         </div>
+         <div class='panel-footer'>
+          <a class='btn btn-default' href="#"><%= followers.email %></a>
+          <%= link_to 'プロフィールを確認', followers , class: "btn btn-primary" %>
+            <% if current_user.following?(followers.id) %>
+    <%= render 'unfollow' %>
+   <% else %>
+    <%= render 'follow' %>
+   <% end %>
+         </div>
+       </div>
+    </div>
+    <% end %>
+ </div>
+ 
+ 
