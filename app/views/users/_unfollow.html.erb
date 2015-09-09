@@ -1,3 +1,5 @@
 <%= form_for(current_user.following_relationships.find_by(followed_id: @user.id), html: { method: :delete }, remote: true) do |f| %>
+Current_Userがフォローしている人:<%= @user.id %>
+current_user:<%= current_user.id %>
 <%= f.submit "Unfollow", class: "btn" %>
 <% end %>
