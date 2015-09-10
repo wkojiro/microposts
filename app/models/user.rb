@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  paginates_per 50
-  max_paginates_per 100
   before_save { self.email = email.downcase }
   validates :name,presence: true, length: { maximum:50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
