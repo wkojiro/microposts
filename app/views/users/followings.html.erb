@@ -3,8 +3,8 @@
 <h3>フォローユーザー数：<%= @followings.count %></h3>
 <div class="row"> 
    <% @followings.each do |followings| %>
-                  <% @user = followings %>
-    <div class='col-sm-4'>
+     <% @user = followings %>
+     <div class='col-sm-4'>
        <div class="panel panel-default">
         <div class="panel-heading">
           <h4 class='panel-title'><%= followings.name %>(<%= followings.id %>)</h4>
@@ -19,30 +19,16 @@
          <div class='panel-footer'>
           <a class='btn btn-default' href='#'><%= followings.email %></a>
          　 <%= link_to 'プロフィールを確認', followings, class: "btn btn-primary" %>
-<!-- 編集領域　-->
-<!-- Temp追加領域　
-  @user = followings 
- 追加領域　
- 削除領域　
-　　　　f current_user != @user 
-
- 削除領域　-->
-
-             <div id = "follow_form">
-                 <%= @user.id %>    
+              <% if current_user != @user %>
+             <div id = "follow_form_<%= @user.id %>">
                 <% if current_user.following?(@user) %>
                  <%= render 'unfollow' %>
-                 <% @user = current_user %>     
                 <% else %>
                  <%= render 'follow' %>
                 <% end %>
              </div>
-
-           　  <!-- @user = followings とするため、必ず　current_user != `@userは超え、if current_user.following?(@user)も超える為、unfollowが表示される。
-   followが表示できる条件として、if notつまり、 unless current_user.following?(@user)としてはどうだろうか。followingを　1行づつ格納していく必要がある。
-<!-- 編集領域　-->    　 
-        　　<span>フォローしている人のID：<%= followings.id %></span><br />
-       　　<span>自分のID：<%= @user.id %></span><br />
+              <% end %>
+            <% @user = current_user %>
 　　　　 </div>
        </div>
     </div>    

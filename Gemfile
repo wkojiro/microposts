@@ -23,6 +23,8 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'kaminari'
+#pagenationのライブラリです。http://www.techscore.com/blog/2013/01/07/rails%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E7%B4%B9%E4%BB%8B-%E3%83%9A%E3%83%BC%E3%82%B8%E3%83%B3%E3%82%B0%E3%82%92%E8%A1%8C%E3%81%86%E3%80%8Ckaminari%E3%80%8D/
 gem 'bootstrap-sass'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
