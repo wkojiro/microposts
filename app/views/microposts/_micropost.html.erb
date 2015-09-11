@@ -4,7 +4,10 @@
     <span class="content"><%= micropost.content %></span>
     <span class="timestamp">
         Posted <%= time_ago_in_words(micropost.created_at) %> ago.
-
+        <%= form_for(@micropost) do |f| %>
+         <%= f.text_area :content, placeholder: "Compose new micropost..." %>
+        <%= f.submit "retweet", method: :retweet, class: "btn btn-primary" %>
+        <% end %>
         <% if current_user == micropost.user %>
         <%= link_to "delete", micropost, method: :delete, data: { confirm: "you sure?" } %>
         <% end %>
