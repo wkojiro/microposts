@@ -2,8 +2,12 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update,:destroy]
 
  def show 
-  @user = User.find(params[:id])
-  @microposts = @user.microposts
+    if User.exists?(params[:id])
+     @user = User.find(params[:id])
+     @microposts = @user.microposts
+    else
+    render 'error/usernotexist.html'
+    end
  end
  
  def followings
