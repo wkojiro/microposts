@@ -10,6 +10,9 @@ class UsersController < ApplicationController
     end
  end
  
+ def retweet
+ end
+ 
  def followings
      @user = User.find(params[:id])
      @followings = @user.following_users
@@ -52,9 +55,7 @@ class UsersController < ApplicationController
     @user.destroy
     redirect_to root_path
  end
- 
- 
- 
+
   private
   def user_params
     params.require(:user).permit(:name, :email, :profile, :area, :password, :password_confirmation)
