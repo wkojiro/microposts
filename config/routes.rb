@@ -13,8 +13,8 @@ resources :users do
   end
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts do
-        member do
-      get :retweet
+        collection do
+      post :retweet
     end
   end
   resources :relationships, only: [:create, :destroy]

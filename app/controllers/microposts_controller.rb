@@ -1,7 +1,10 @@
 class MicropostsController < ApplicationController
     before_action :logged_in_user, only:[:create]
+
+
+
     def create
-      @micropost = current_user.microposts.build(micropost_params)
+      @micropost = current_user.microposts.build(micropost_params) #保存用　@micropost 単数形
         if @micropost.save
             flash[:success] = "Micropost created!"
             redirect_to root_url
@@ -23,6 +26,8 @@ class MicropostsController < ApplicationController
         if @micropost.save
             flash[:success] = "retweet created!"
             redirect_to request.referrer || root_url
+        else
+            render 'static_pages/home'
         end
     end
     

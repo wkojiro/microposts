@@ -1,11 +1,11 @@
 <% if logged_in? %>
-<%= render 'users/test' %>
+<%= @user.microposts.inspect %>
   <div class="row">
     <aside class="col-md-4">
       <section class="user_info">
         <%= render 'shared/user_info' %>
       </section>
-      <section class="micropost_form">
+      <section class="micropost_form">　ここでマイクロポストのFormを読み込んでいる。
         <%= render 'shared/micropost_form' %>
       </section>
     </aside>
@@ -22,4 +22,3 @@
     <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
   </div>
 <% end %>
-
