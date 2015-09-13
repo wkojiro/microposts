@@ -3,7 +3,8 @@ class UsersController < ApplicationController
 
  def show 
       @user = User.find(params[:id])
-      @micropost = @user.microposts.build
+      @microposts = @user.microposts
+      @micropost = current_user.microposts.build
  end
 
  def followings

@@ -33,7 +33,7 @@ class MicropostsController < ApplicationController
     
     private
     def micropost_params
-        params.require(:micropost).permit(:content)
+        params.require(:micropost).permit(:content, :origin_id)
     end
     
 end
