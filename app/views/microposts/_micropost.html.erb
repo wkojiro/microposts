@@ -1,20 +1,32 @@
-<li id="micropost-<%= micropost.id %>">
+
+<li id="micropost-<%= pluralize(current_user.microposts.count, "microposts") %>">
     <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
     <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
-    <span class="content">この記事のID:<%= micropost.id %></span>
-    <% if micropost.origin_id != nil %>
+    <span class="micropost_id">この記事のID:<%= micropost.id %></span> 
+    <span class="origin_id">この記事のRetweet数</span> <%=  @retweet_count = Micropost.where(origin_id: micropost.id).count %>
+    <% if micropost.origin != nil %>
+
+
+
+
 
     Retweetされた記事です。元記事：<%= micropost.origin_id %>
     <% end %>
     <span class="content"><%= micropost.content %></span>
     <span class="timestamp">
+
      Posted <%= time_ago_in_words(micropost.created_at) %> ago
-        <%= link_to "delete", micropost, method: :delete, data: { confirm: "you sure?" } %>
+     <% if micropost.user == @user %>
+         <%= link_to "delete", micropost, method: :delete, data: { confirm: "you sure?" } %>
+     <% end %>
+   　<% if controller.controller_name == "static_pages" && micropost.user != @user %>
 　　　<%= form_for @micropost,:url => {:action =>'retweet',:controller=>'microposts'} do |f| %>
 　　　　　<%= f.text_area :content, :value => micropost.content %>
           <%= f.hidden_field :origin_id, :value => micropost.id %>
-        　<%= f.submit "retweet" %>
+         <%= f.submit "retweet" ,:class => "btn btn-default btn-sm" %>
+         <% end %>
       <% end %>
-    
+      
     </span>
 </li> 
+

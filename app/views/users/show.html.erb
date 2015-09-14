@@ -34,8 +34,9 @@
   <%= render 'follow_form' if logged_in? %>
     <% if @user.microposts.any? %>
     　<h3>Microposts (<%= @user.microposts.count %>)</h3>
-       <ol class="microposts">ここでRender micropostsを読み込んでいる。
-           <%= render @microposts %>
+       <ol class="microposts">ここでRender @microposts　を読み込んでいる。なんでここから変わるのだろうか。。Showだからログインした後のページ。（ユーザーIDで持ってきている）
+       
+             <%= render partial: 'microposts/micropost', collection:@microposts %>
        </ol>
 　  <% end %>               
   </div>

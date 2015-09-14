@@ -1,8 +1,5 @@
 class MicropostsController < ApplicationController
     before_action :logged_in_user, only:[:create]
-
-
-
     def create
       @micropost = current_user.microposts.build(micropost_params) #保存用　@micropost 単数形
         if @micropost.save

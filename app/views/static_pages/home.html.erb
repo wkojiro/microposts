@@ -1,5 +1,12 @@
+
 <% if logged_in? %>
-<%= @user.microposts.inspect %>
+ここはHOMEです。
+<%= @micropost.inspect %>
+<hr >
+<%= @microposts.inspect %>
+<hr >
+
+
   <div class="row">
     <aside class="col-md-4">
       <section class="user_info">
@@ -10,7 +17,7 @@
       </section>
     </aside>
     <div class="col-md-8">
-      <h3>Micropost Feed</h3>
+      <h3>Micropost Feed(ここでFeedを読み込んでいる）</h3>
 
       <%= render 'shared/feed' %>
 
