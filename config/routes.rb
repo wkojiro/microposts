@@ -9,10 +9,15 @@ resources :users do
     member do
       get :followings
       get :followers
+      get :favorites
     end
   end
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts do
+        member do
+      post :favorite
+      post :unfavorite
+    end
         collection do
       post :retweet
     end

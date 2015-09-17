@@ -3,3 +3,8 @@
  <%= f.submit "Follow", class: "btn btn-primary" %>
  <% end %>
  
+ 
+ <%= form_for(current_user.favorite.build, remote: true) do |f| %>
+ <div><%= hidden_field_tag :micropost_id, @micropst.id %></div>
+ <%= f.submit "favorite", class: "btn btn-primary" %>
+ <% end %>

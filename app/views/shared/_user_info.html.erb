@@ -6,5 +6,9 @@
                 <% @followers = @user.follower_users %>
                 <span><%= link_to "フォローしている" , followings_user_path(@user) %>(<%= @followings.count %>)</span>
                 <span><%= link_to "フォローされている" , followers_user_path(@user) %>(<%= @followers.count %>)</span>
-                <% end %>
+                <% @favorite = @user.favorite_microposts %>
+               <span> <%= link_to "favorite" , favorites_user_path(@user) %>(<%= @favorite.count %>)</span> 
+               
+        
+               <% end %>
 <span><%= pluralize(current_user.microposts.count, "microposts") %></span>

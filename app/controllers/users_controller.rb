@@ -1,11 +1,18 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update,:destroy]
+  
 
  def show 
       @user = User.find(params[:id])
       @microposts = @user.microposts
       @micropost = current_user.microposts.build
  end
+
+ def favorites
+     @user = User.find(params[:id])
+     @favorites = @user.favorite_microposts
+ end
+
 
  def followings
      @user = User.find(params[:id])
