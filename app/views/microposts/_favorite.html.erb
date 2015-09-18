@@ -1,1 +1,3 @@
-<%= link_to "favorite" , favorite_micropost_path(micropost.id) , :method => :post %>
+<span id="mypost_<%= mp.id %>"class="label label-warning">
+<%= link_to "favorite", favorite_micropost_path(mp.id), remote: true , method: :post  %>
+</span>

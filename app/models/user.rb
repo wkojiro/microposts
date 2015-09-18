@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
 
  # あるツイートをお気に入りにしているかどうか？ 
   def favorite?(other_micropost) 
-    favorites.include?(other_micropost) 
+    favorite_microposts.include?(other_micropost) 
   end 
   
 end

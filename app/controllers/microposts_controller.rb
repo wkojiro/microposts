@@ -7,11 +7,11 @@ class MicropostsController < ApplicationController
             flash[:success] = "Micropost created!"
             redirect_to root_url
         else
+            @feed_items = current_user.feed_items.includes(:user).order(created_at: :desc).page(params[:page]).per(5)
             render 'static_pages/home'
         end
     end
 
-    
     def destroy
      @micropost = current_user.microposts.find_by(id: params[:id])
      return redirect_to root_url if @micropost.nil?
@@ -24,25 +24,28 @@ class MicropostsController < ApplicationController
      @micropost = current_user.microposts.build(micropost_params)
         if @micropost.save
             flash[:success] = "retweet created!"
-            redirect_to request.referrer || root_url
+            redirect_to request.referrer 
+            #render 'static_pages/home'
         else
             render 'static_pages/home'
         end
     end
    
    def favorite
-     @micropost = Micropost.find(params[:id])
-    current_user.favorite(@micropost) 
+        @micropost = Micropost.find(params[:id])
+        current_user.favorite(@micropost)  
+        render 'microposts/favorite.js.erb'
    end
   
    def unfavorite
-    @micropost = Micropost.find(params[:id])
-    current_user.unfavorite(@micropost) 
+        @micropost = Micropost.find(params[:id])
+        current_user.unfavorite(@micropost) 
+        render 'microposts/unfavorite.js.erb'
    end
   
     private
     def micropost_params
-        params.require(:micropost).permit(:content, :origin_id)
+        params.require(:micropost).permit(:content, :origin_id ,:image)
     end
     
 end

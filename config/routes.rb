@@ -16,7 +16,7 @@ resources :users do
   resources :microposts do
         member do
       post :favorite
-      post :unfavorite
+      delete :unfavorite
     end
         collection do
       post :retweet

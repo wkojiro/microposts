@@ -2,43 +2,36 @@
 <li id="micropost-<%= pluralize(current_user.microposts.count, "microposts") %>">
     <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
     <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
-    <span class="micropost_id">この記事のID:<%= micropost.id %></span> 
-    <span class="origin_id">この記事のRetweet数</span> <%=  @retweet_count = Micropost.where(origin_id: micropost.id).count %>
+    <span class="origin_id">Retweet数</span> <%=  @retweet_count = Micropost.where(origin_id: micropost.id).count %>
+    <span class="favorite_id">お気に入り数 </span>  <%= @fav_count = Favorite.where(micropost_id: micropost.id).count %>
     <% if micropost.origin != nil %>
-
-    Retweetされた記事です。元記事：<%= micropost.origin_id %>
+    Retweet記事です!<% @ori_id = micropost.origin_id %><% @oriuser_id = Micropost.find(@ori_id) %><% @oriuser_id = @oriuser_id.user_id %>
+  　書いた人： <% @name = User.find(@oriuser_id) %> <%= @name.name %>さんの記事です。
     <% end %>
+    <hr >
     <span class="content"><%= micropost.content %></span>
+  　 <span class="content"> <%= image_tag micropost.image_url.to_s %> <span>
     <span class="timestamp">
-
      Posted <%= time_ago_in_words(micropost.created_at) %> ago
      <% if micropost.user == @user %>
          <%= link_to "delete", micropost, method: :delete, data: { confirm: "you sure?" } %>
      <% end %>
- 
-  <% unless @user.favorite?(@micropost.id) %>
-     eee
-  <% end %>
-  
- <% @fav= @user.favorite_microposts %>
-  <%= @fav.inspect %>
-    　<% if controller.controller_name == "static_pages" && micropost.user != @user %>
+         　<% if controller.controller_name == "static_pages" && micropost.user != @user %>
                    <% if current_user == @user %>
-                         <div id = "favorite_form_<%= @micropost.id %>">
-                                <% unless @user.favorite?(@micropost.id) %>
-                             <%= link_to "unfavorite" , unfavorite_micropost_path(micropost.id), :method => :post %>
-                               <% else %>
-                           <%= link_to "favorite" , favorite_micropost_path(micropost.id), :method => :post %>
-                               <% end %>
-                         </div>
+                      <div id = "favorite_form_<%= micropost.id %>">
+                         <% if current_user.favorite?(@micropost.id) %>
+                           <%= render 'microposts/unfavorite', mp: micropost %>
+                            <% else %>
+                          <%= render 'microposts/favorite', mp: micropost %>
+                        <% end %>
+　　　　　　　　　　  </div>
                    <% end %>
-　　　　　　<%= form_for @micropost,:url => {:action =>'retweet',:controller=>'microposts'} do |f| %>
-　　　　　<%= f.text_area :content, :value => micropost.content %>
+                <%= form_for @micropost,:url => {:action =>'retweet',:controller=>'microposts'} do |f| %>
+　　　  　　<%= f.text_area :content, :value => micropost.content %>
           <%= f.hidden_field :origin_id, :value => micropost.id %>
          <%= f.submit "retweet" ,:class => "btn btn-default btn-sm" %>
          <% end %>
       <% end %>
-
     </span>
 </li> 
 

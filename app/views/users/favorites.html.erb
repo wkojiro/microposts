@@ -1,6 +1,30 @@
 <h1>favorites microposts (<%= @user.name %>) </h1>
-<h3>お気に入りの投稿数：</h3>
+<h3>お気に入り投稿数:<%= @favorites.count %></h3>
 <div class="row">
+   <% @favorites.each do |favorites| %>
+    <div class='col-sm-4'>
+       <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class='panel-title'><%= favorites.id %><% @oriuser_id = Micropost.find(favorites.id) %><% @oriuser_id = @oriuser_id.user_id %>
+  　書いた人： <% @name = User.find(@oriuser_id) %> <%= @name.name %>さんの記事です。</h4>
+        </div>
+         <div class="panel-body">
+          <p>
+          <%= favorites.content %><img src="<%= favorites.image %>"></p>
+          <p>
+          <%= favorites.created_at %>
+          </p>
+         </div>
+         <div class='panel-footer'>
+         
+        
+         </div>
+       </div>
+    </div>
+    <% end %>
+ </div>
+
+
    <%= @favorites.inspect  %>
 
  </div>

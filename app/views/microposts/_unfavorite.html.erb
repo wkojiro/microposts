@@ -1,1 +1,3 @@
- <%= link_to "unfavorite" , unfavorite_micropost_path(micropost.id), :method => :post %>
+<span id="myunfollow_<%= mp.id %>"class="label label-warning">
+<%= link_to "unfavorite", unfavorite_micropost_path(mp.id) , remote: true, method: :delete %>
+</span>
