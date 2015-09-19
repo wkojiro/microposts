@@ -1,42 +1,40 @@
-<%= @user.microposts.inspect %>
 <div class="row">
   <aside class="col-md-4">
-   <div class="well well-sm">        
     <section class="user_info">
 　   <div class="avator" style="text-align:center;">
          <%= gravatar_for @user %>
-     </div>    <% if current_user == @user %>
+     </div>   
 　     <h4><%= @user.name %></h4>
-　     <% else %>
-　     <h4>ユーザー名はcurrent_userではないです。<%= @user.name %></h4>
-　         <% end %>
-　 　    <span stye="display:in-block;">
+　       <span stye="display:in-block;">
 　 　      <%= @user.profile%></span>
+            <% if current_user == @user %>
 　 　       <%= link_to '削除', user_path(@user), method: 'DELETE' %>
+　 　       <% end %>
           <small><cite title="<%= @user.area %>"><%= @user.area %><i class="glyphicon glyphicon-map-marker"></i></cite></small>
            <p><i class="glyphicon glyphicon-envelope"></i><%= @user.email %>
                         
                 <% @followings = @user.following_users %>
                 <% @followers = @user.follower_users %>
-                <span><%= link_to "フォローしている" , followings_user_path(@user) %>(<%= @followings.count %>)</span>
-                <span><%= link_to "フォローされている" , followers_user_path(@user) %>(<%= @followers.count %>)</span>
-               
+                        <div class="col-md-3"><span><% if @user.microposts.any? %>ツィート：<br >（<%= @user.microposts.count %>）<% else %>(0)<% end %></span> </div>
+                        <div class="col-md-3"><span><%= link_to "フォロー" , followings_user_path(@user) %><br >(<%= @followings.count %>)</span></div>
+                        <div class="col-md-3"> <span><%= link_to "フォロワー" , followers_user_path(@user) %><br >(<%= @followers.count %>)</span></div>
+      
+                
           <br />
          <% if current_user == @user %>
-         <div style="text-align:center;">
-           <%= link_to 'edit', edit_user_path(@user), class: "btn btn-primary" %>
+         <div class="col-md-6 col-md-offset-1">
+           <%= link_to 'プロフィールを編集', edit_user_path(@user), class: "btn btn-primary" %>
          </div>
          <% end %>
 　 　</section>
-　 </div>
 　</aside>
   <div class="col-md-8">
   <%= render 'follow_form' if logged_in? %>
     <% if @user.microposts.any? %>
     　<h3>Microposts (<%= @user.microposts.count %>)</h3>
-       <ol class="microposts">ここでRender @microposts　を読み込んでいる。なんでここから変わるのだろうか。。Showだからログインした後のページ。（ユーザーIDで持ってきている）
-       
-             <%= render partial: 'microposts/micropost', collection:@microposts %>
+       <ol class="microposts"> <!--#ここでRender @microposts　を読み込んでいる。なんでここから変わるのだろうか。。
+       Showだからログインした後のページ。（ユーザーIDで持ってきている）-->
+            <%= render partial: 'microposts/micropost', collection:@microposts %>
        </ol>
 　  <% end %>               
   </div>
