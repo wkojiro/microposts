@@ -15,7 +15,7 @@
                         
                 <% @followings = @user.following_users %>
                 <% @followers = @user.follower_users %>
-                        <div class="col-md-3"><span><% if @user.microposts.any? %>ツィート：<br >（<%= @user.microposts.count %>）<% else %>(0)<% end %></span> </div>
+                        <div class="col-md-3"><span><% if @user.microposts.any? %>ツィート<br >（<%= @user.microposts.count %>）<% else %>ツィート<br >(0)<% end %></span> </div>
                         <div class="col-md-3"><span><%= link_to "フォロー" , followings_user_path(@user) %><br >(<%= @followings.count %>)</span></div>
                         <div class="col-md-3"> <span><%= link_to "フォロワー" , followers_user_path(@user) %><br >(<%= @followers.count %>)</span></div>
       
